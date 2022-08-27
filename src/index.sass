@@ -3,3 +3,44 @@ body
   font-family: system-ui
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
+  background-color: #e7f6ff
+
+.wrapper
+  max-width: 1080px
+  background: #FFFFFF
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04)
+  border-radius: 20px
+  margin: 85px auto
+
+.header
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 40px
+  border-bottom: 1px solid #eaeaea
+  &-logo
+    text-decoration: none
+    color: inherit
+    display: flex
+    align-items: center
+    img
+      margin-right: 16px
+    h3
+      text-transform: uppercase
+      margin: 0
+    p
+      opacity: .5
+      margin: 0
+  &-list
+    display: flex
+    align-items: center
+    list-style: none
+    padding: 0
+    margin: 0
+    &__item
+      img
+        vertical-align: sub
+      span
+        margin-left: 10px
+      & + &
+        margin-left: 30px
