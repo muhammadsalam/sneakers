@@ -112,6 +112,22 @@ body
       b
         font-weight: 600
         font-size: 16px
+  &-empty
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    flex-grow: 1
+    & > img
+      margin-bottom: 21px
+    strong
+      font-size: 22px
+      font-weight: 600
+    p
+      margin: 9px 0 40px
+      font-size: 16px
+      line-height: 24px
+      opacity: .4
 
 .header
   display: flex
@@ -139,9 +155,11 @@ body
     padding: 0
     margin: 0
     &__item
-      display: flex
-      align-items: center
-      button
+      & + &
+        margin-left: 30px
+      button, & a
+        display: flex
+        align-items: center
         background: 0
         border: 0
         padding: 0
@@ -155,8 +173,6 @@ body
         transition: stroke .2s ease-out
       span
         margin-left: 10px
-      & + &
-        margin-left: 30px
 
 .content
   padding: 40px
@@ -182,15 +198,15 @@ body
       outline: none
       margin-left: 8px
       padding: 13px 8px 15px 46px
-      background: url('./assets/img/icons/search.svg') no-repeat 18px center
+      background: url('../public/img/icons/search.svg') no-repeat 18px center
       transition: border-color .2s ease-out, background-image .2s ease-out
       &::placeholder
         color: #C4C4C4
       &:focus
-        background-image: url('./assets/img/icons/search-focus.svg')
+        background-image: url('../public/img/icons/search-focus.svg')
         border-color: #6FCF97
       &:not(:placeholder-shown)
-        background-image: url('./assets/img/icons/search-focus.svg')
+        background-image: url('../public/img/icons/search-focus.svg')
         border-color: #6FCF97
 
 .btn-32
@@ -203,6 +219,11 @@ body
   height: 32px
   cursor: pointer
   transition: box-shadow .2s linear
+  &:disabled
+    opacity: 9
+    cursor: default
+  &.bxsh:hover
+    box-shadow: 1px 3px 10px -3px rgba(0, 0, 0, 0.15)
   path
     transition: stroke .2s ease-out, fill .2s ease-out
   svg
@@ -246,8 +267,5 @@ body
 
 .sneakers
   display: flex
-  margin: 0 -15px
-  &-bottom
-    display: flex
-    justify-content: space-between
-    align-items: center
+  flex-wrap: wrap
+  margin: -20px -15px
