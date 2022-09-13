@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../../App";
 import ContentLoader from "react-content-loader";
 import styles from "./Card.module.sass";
 
@@ -10,15 +11,13 @@ export default function Card({
 	onFavourite,
 	onAddToCart,
 	isFav = false,
-	isAdded = false,
 	isLoading = false,
 }) {
+	const {isItemAdded} = useContext(AppContext);
 	const [isFavourite, setIsFavourite] = useState(isFav);
-	const [isAdd, setIsAdd] = useState(isAdded);
 
 	const handleCardAdd = () => {
 		onAddToCart({ id, title, imageUrl, price });
-		setIsAdd(!isAdd);
 	};
 
 	const handleCardLike = () => {
@@ -88,7 +87,7 @@ export default function Card({
 							<img
 								src={
 									"../img/icons/plus-" +
-									(isAdd ? "" : "un") +
+									(isItemAdded(id) ? "" : "un") +
 									"added.svg"
 								}
 								alt="add to cart"

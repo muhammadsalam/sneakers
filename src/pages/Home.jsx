@@ -9,6 +9,7 @@ function Home({
 	onAddToCart,
 	isLoading,
 }) {
+
 	const renderItems = () => {
 		const filteredItems = items.filter((item) =>
 			item.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -20,11 +21,11 @@ function Home({
 				{...card}
 				onFavourite={onAddToFavourites}
 				onAddToCart={onAddToCart}
-				isAdded={cartItems.some((item) => +item.id === +card.id)}
 				isLoading={isLoading}
 			/>
 		));
 	};
+
 	return (
 		<div className="content">
 			<div className="content-top">
