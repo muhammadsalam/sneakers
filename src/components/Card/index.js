@@ -15,7 +15,7 @@ export default function Card({
 	const {isItemAdded} = useContext(AppContext);
 	const {isItemFav} = useContext(AppContext);
 
-	const handleCardAdd = () => onAddToCart({ id, title, imageUrl, price });
+	const handleCardAdd = () => onAddToCart({ id, title, imageUrl, price});
 
 	const handleCardLike = () => onFavourite({ id, imageUrl, title, price });
 

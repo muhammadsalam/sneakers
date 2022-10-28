@@ -52,9 +52,9 @@ function App() {
 		} else {
 			axios.post(
 				"https://630d478353a833c5343e1eb7.mockapi.io/cart",
-				card
+				{...card, parentId: +card.id}
 			);
-			setCartItems((prev) => [...prev, card]);
+			setCartItems((prev) => [...prev, {...card, parentId: +card.id}]);
 		}
 	};
 
@@ -76,9 +76,9 @@ function App() {
 			} else {
 				const { data } = await axios.post(
 					"https://630d478353a833c5343e1eb7.mockapi.io/favourites",
-					card
+					{...card, parentId: +card.id}
 				);
-				setFavourites((prev) => [...prev, data]);
+				setFavourites((prev) => [...prev, {...card, parentId: +card.id}]);
 			}
 		} catch (error) {
 			alert("Не удалось добавить в закладки");
@@ -86,7 +86,7 @@ function App() {
 	};
 
 	const isItemAdded = (id) => cartItems.some((item) => +item.id === +id);
-	const isItemFav = (id) => favourites.some((item) => +item.id === +id);
+	const isItemFav = (id) => favourites.some((item) => +item.parentId === +id);
 
 	return (
 		<AppContext.Provider value={{ items, cartItems, favourites, isItemFav, isItemAdded }}>
