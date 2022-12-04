@@ -6,7 +6,6 @@ function Favourites({
 	onAddToFavourites,
 	onAddToCart,
 }) {
-
 	const { favourites } = useContext(AppContext);
 
 	return (

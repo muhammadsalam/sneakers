@@ -8,16 +8,16 @@ export default function Card({
 	imageUrl,
 	title,
 	price,
+	token,
 	onFavourite,
 	onAddToCart,
 	isLoading = false,
 }) {
-	const {isItemAdded} = useContext(AppContext);
-	const {isItemFav} = useContext(AppContext);
+	const {isItemAdded, isItemFav} = useContext(AppContext);
 
-	const handleCardAdd = () => onAddToCart({ id, title, imageUrl, price});
+	const handleCardAdd = () => onAddToCart({ title, imageUrl, price, token});
 
-	const handleCardLike = () => onFavourite({ id, imageUrl, title, price });
+	const handleCardLike = () => onFavourite({ imageUrl, title, price });
 
 	const finalPrice =
 		price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " руб.";
@@ -56,7 +56,7 @@ export default function Card({
 							<img
 								src={
 									"../img/icons/heart-" +
-									(isItemFav(id) ? "" : "un") +
+									(isItemFav(token) ? "" : "un") +
 									"liked.svg"
 								}
 								alt="добавить в закладки"
@@ -81,7 +81,7 @@ export default function Card({
 							<img
 								src={
 									"../img/icons/plus-" +
-									(isItemAdded(id) ? "" : "un") +
+									(isItemAdded(token) ? "" : "un") +
 									"added.svg"
 								}
 								alt="add to cart"
