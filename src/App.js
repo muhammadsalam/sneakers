@@ -69,7 +69,8 @@ function App() {
 				setCartItems((prev) => [...prev, { ...card, id: data.id }]);
 			}
 		} catch (error) {
-			alert(error.message);
+			alert("Ошибка, попробуйте чуть позже.");
+			console.log(error.message);
 		}
 	};
 
@@ -80,32 +81,34 @@ function App() {
 
 	const onAddToFavourites = async (card) => {
 		try {
-			if (favourites.find((item) => item.id == card.id)) {
+			const findedCard = favourites.find(
+				(item) => +item.token === +card.token
+			);
+			if (findedCard) {
 				axios.delete(
 					"https://630d478353a833c5343e1eb7.mockapi.io/favourites/" +
-						card.id
+						findedCard.id
 				);
 				setFavourites((prev) =>
-					prev.filter((item) => item.id != card.id)
+					[...prev].filter((item) => +item.token !== +card.token)
 				);
 			} else {
 				const { data } = await axios.post(
 					"https://630d478353a833c5343e1eb7.mockapi.io/favourites",
-					{ ...card, parentId: +card.id }
+					card
 				);
-				setFavourites((prev) => [
-					...prev,
-					{ ...card, parentId: +card.id },
-				]);
+				setFavourites((prev) => [...prev, { ...card, id: +data.id }]);
 			}
 		} catch (error) {
-			alert("Не удалось добавить в закладки");
+			alert("Ошибка, попробуйте чуть позже.");
+			console.log(error.message);
 		}
 	};
 
 	const isItemAdded = (token) =>
 		cartItems.some((item) => +item.token === +token);
-	const isItemFav = (id) => favourites.some((item) => +item.parentId === +id);
+	const isItemFav = (token) =>
+		favourites.some((item) => +item.token === +token);
 
 	return (
 		<AppContext.Provider

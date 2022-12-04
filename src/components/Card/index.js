@@ -15,9 +15,9 @@ export default function Card({
 }) {
 	const {isItemAdded, isItemFav} = useContext(AppContext);
 
-	const handleCardAdd = () => onAddToCart({ title, imageUrl, price, token});
+	const handleCardAdd = () => onAddToCart({ title, imageUrl, price, token });
 
-	const handleCardLike = () => onFavourite({ imageUrl, title, price });
+	const handleCardLike = () => onFavourite({ title, imageUrl, price, token });
 
 	const finalPrice =
 		price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " руб.";
