@@ -39,7 +39,7 @@ export default function Drawer(props) {
                       </b>
                     </div>
                     <button
-                      onClick={() => props.onRemove(item.id)}
+                      onClick={() => props.onRemove(item.token, item.id)}
                       className="btn-32 | drawer-item__button"
                     >
                       <svg
@@ -60,12 +60,12 @@ export default function Drawer(props) {
                 <li>
                   <span>Итого: </span>
                   <div></div>
-                  <b>21 498 руб.</b>
+                  <b>{props.price}</b>
                 </li>
                 <li>
                   <span>Налог 5%: </span>
                   <div></div>
-                  <b>1074 руб.</b>
+                  <b>{props.priceTax}</b>
                 </li>
               </ul>
               <button className="btn-w-arrow grow arr-right">

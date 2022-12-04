@@ -74,9 +74,18 @@ function App() {
 		}
 	};
 
-	const onRemoveFromCart = (id) => {
-		axios.delete("https://630d478353a833c5343e1eb7.mockapi.io/cart/" + id);
-		setCartItems((prev) => prev.filter((item) => item.id != id));
+	const onRemoveFromCart = (token, id) => {
+		try {
+			axios.delete(
+				"https://630d478353a833c5343e1eb7.mockapi.io/cart/" + +id
+			);
+			setCartItems((prev) =>
+				prev.filter((item) => +item.token !== +token)
+			);
+		} catch (error) {
+			alert("Ошибка, попробуйте чуть позже.");
+			console.log(error.message);
+		}
 	};
 
 	const onAddToFavourites = async (card) => {
@@ -107,8 +116,21 @@ function App() {
 
 	const isItemAdded = (token) =>
 		cartItems.some((item) => +item.token === +token);
+
 	const isItemFav = (token) =>
 		favourites.some((item) => +item.token === +token);
+
+	const totalPrice = cartItems.reduce(
+		(total, { price }) => total + +price,
+		0
+	);
+
+	const totalPriceTax = totalPrice / 100 + 5;
+	
+	const priceWithText = (price) =>
+		Math.floor(price)
+			.toString()
+			.replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " руб.";
 
 	return (
 		<AppContext.Provider
@@ -119,10 +141,15 @@ function App() {
 					<Drawer
 						onRemove={onRemoveFromCart}
 						items={cartItems}
+						price={priceWithText(totalPrice + totalPriceTax)}
+						priceTax={priceWithText(totalPriceTax)}
 						onClose={() => setIscartOpened(false)}
 					/>
 				)}
-				<Header onClickCart={() => setIscartOpened(true)} />
+				<Header
+					price={priceWithText(totalPrice + totalPriceTax)}
+					onClickCart={() => setIscartOpened(true)}
+				/>
 				<Routes>
 					<Route
 						path="/"

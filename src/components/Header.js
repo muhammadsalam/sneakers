@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Header({ onClickCart }) {
+export default function Header({ price, onClickCart }) {
   return (
     <header className="header">
       <Link to="/" className="header-logo">
@@ -39,7 +39,7 @@ export default function Header({ onClickCart }) {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>1205 руб.</span>
+            <span>{price}</span>
           </button>
         </li>
         <li className="header-list__item">
