@@ -1,11 +1,14 @@
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
+
 import Home from "./pages/Home";
-import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
 import Favourites from "./pages/Favourites";
 import Profile from "./pages/Profile";
+
+import axios from "axios";
+
+import React, { createContext, useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 
 export const AppContext = createContext({});
 
@@ -127,7 +130,7 @@ function App() {
 	);
 
 	const totalPriceTax = totalPrice / 100 + 5;
-	
+
 	const priceWithText = (price) =>
 		Math.floor(price)
 			.toString()
@@ -147,7 +150,9 @@ function App() {
 					/>
 				)}
 				<Header
-					price={totalPrice && priceWithText(totalPrice + totalPriceTax)}
+					price={
+						totalPrice && priceWithText(totalPrice + totalPriceTax)
+					}
 					onClickCart={() => setIscartOpened(true)}
 				/>
 				<Routes>
@@ -169,13 +174,8 @@ function App() {
 							<Favourites
 								onAddToCart={onAddToCart}
 								onAddToFavourites={onAddToFavourites}
+								isLoading={isLoading}
 							/>
-						}
-					/>
-					<Route
-						path="/profile"
-						element={
-							<Profile/>
 						}
 					/>
 				</Routes>
