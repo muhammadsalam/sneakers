@@ -5,6 +5,7 @@ import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Favourites from "./pages/Favourites";
+import Profile from "./pages/Profile";
 
 export const AppContext = createContext({});
 
@@ -140,14 +141,13 @@ function App() {
 				{isCartOpened && (
 					<Drawer
 						onRemove={onRemoveFromCart}
-						items={cartItems}
 						price={priceWithText(totalPrice + totalPriceTax)}
 						priceTax={priceWithText(totalPriceTax)}
 						onClose={() => setIscartOpened(false)}
 					/>
 				)}
 				<Header
-					price={priceWithText(totalPrice + totalPriceTax)}
+					price={totalPrice && priceWithText(totalPrice + totalPriceTax)}
 					onClickCart={() => setIscartOpened(true)}
 				/>
 				<Routes>
@@ -157,7 +157,6 @@ function App() {
 							<Home
 								searchValue={searchValue}
 								handleSearchInput={handleSearchInput}
-								items={items}
 								onAddToFavourites={onAddToFavourites}
 								onAddToCart={onAddToCart}
 								isLoading={isLoading}
@@ -171,6 +170,12 @@ function App() {
 								onAddToCart={onAddToCart}
 								onAddToFavourites={onAddToFavourites}
 							/>
+						}
+					/>
+					<Route
+						path="/profile"
+						element={
+							<Profile/>
 						}
 					/>
 				</Routes>

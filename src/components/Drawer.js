@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { AppContext } from "../App";
+
 export default function Drawer(props) {
+  const {cartItems} = useContext(AppContext);
+
   return (
     <div className="overlay">
       <div className="drawer">
@@ -19,11 +24,11 @@ export default function Drawer(props) {
             </svg>
           </button>
         </div>
-        {props.items.length > 0 ? (
+        {cartItems.length > 0 ? (
           <>
             <div className="drawer-list">
-              {props.items &&
-                props.items.map((item) => (
+              {cartItems &&
+                cartItems.map((item) => (
                   <div className="drawer-item" key={item.id}>
                     <img
                       className="drawer-item__img"
