@@ -13,7 +13,7 @@ function Drawer(props) {
 	const onclickOrder = async () => {
 		try {
 			setIsLoading(true);
-      console.log(cartItems);
+
       const { data } = await axios.post(
         "https://630d478353a833c5343e1eb7.mockapi.io/orders",
           {
@@ -30,7 +30,7 @@ function Drawer(props) {
 					"https://630d478353a833c5343e1eb7.mockapi.io/cart/" +
 						item.id
 				);
-				await delay(1000);
+				await delay(600);
 			}
 			setCartItems([]);
 
@@ -119,6 +119,7 @@ function Drawer(props) {
 								</li>
 							</ul>
 							<button
+                disabled={isLoading}
 								onClick={onclickOrder}
 								className="btn-w-arrow grow arr-right"
 							>

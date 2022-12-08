@@ -229,6 +229,12 @@ body
   svg
     vertical-align: middle
 
+@keyframes disabled__loading
+  0%
+    opacity: 1
+  100%
+    opacity: .7
+
 .btn-w-arrow
   min-width: 245px
   text-align: center
@@ -264,6 +270,10 @@ body
     position: absolute
     left: 30px
     transition: transform .2s ease-in-out
+  &[disabled]
+    animation: disabled__loading .5s ease-out infinite alternate-reverse
+    background-color: #D3D3D3 !important
+    cursor: wait !important    
 
 .sneakers
   display: flex
