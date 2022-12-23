@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { AppContext } from "../App";
+import Info from "./Info";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -30,7 +31,7 @@ function Drawer(props) {
 					"https://630d478353a833c5343e1eb7.mockapi.io/cart/" +
 						item.id
 				);
-				await delay(600);
+        cartItems[i + 1] && await delay(600);
 			}
 			setCartItems([]);
 
@@ -132,24 +133,12 @@ function Drawer(props) {
 						</div>
 					</>
 				) : (
-					<div className="drawer-empty">
-						<img
-							src="/img/empty-box.png"
-							alt="you does not have sneakers in your cart"
-						/>
-						<strong>Корзина пустая</strong>
-						<p>
-							Добавьте хотя бы одну пару кроссовок, чтобы сделать
-							заказ.
-						</p>
-						<button className="btn-w-arrow" onClick={props.onClose}>
-							<img
-								src="/img/icons/arrow-left.svg"
-								alt="arrow left"
-							/>
-							Вернуться назад
-						</button>
-					</div>
+					<Info
+						imgUrl={isOrderComplete ? '/img/orderComplete.png' : '/img/empty-box.png'}
+						title={isOrderComplete ? 'Заказ оформлен!' : 'Корзина пустая'}
+						description={isOrderComplete ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке` : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}
+						onClose={props.onClose}
+					/>
 				)}
 			</div>
 		</div>
