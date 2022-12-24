@@ -186,6 +186,15 @@ function App() {
 							/>
 						}
 					/>
+					<Route
+						path="/profile"
+						element={
+							<Profile
+								onAddToCart={onAddToCart}
+								onAddToFavourites={onAddToFavourites}
+							/>
+						}
+					/>
 				</Routes>
 			</div>
 		</AppContext.Provider>
