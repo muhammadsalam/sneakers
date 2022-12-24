@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Card from "../components/Card";
 import { AppContext } from "../App";
+import Info from "../components/Info";
 
 function Favourites({
 	onAddToFavourites,
@@ -23,12 +24,26 @@ function Favourites({
 
 	return (
 		<div className="content">
-			<div className="content-top">
-				<h1 className="title">Мои закладки</h1>
+		{(isLoading || (favourites.length > 0)) ? (
+			<>
+				<div className="content-top">
+					<h1 className="title">Мои закладки</h1>
+				</div>
+				<div className="sneakers">{renderItems()}</div>
+			</>
+		) : (
+			<div className="content-empty">
+				<Info
+					imgUrl={"/img/no-favourites.png"}
+					title={"Закладок нет :("}
+					description={
+						"Вы ничего не добавляли в закладки"
+					}
+					linkUrl={"/"}
+				/>
 			</div>
-
-			<div className="sneakers">{renderItems()}</div>
-		</div>
+		)}
+	</div>
 	);
 }
 
