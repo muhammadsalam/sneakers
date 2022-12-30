@@ -44,6 +44,7 @@ function Drawer(props) {
 
 	return (
 		<div className="overlay">
+			<div className="overlay-close" onClick={props.onClose}></div>
 			<div className="drawer">
 				<div className="drawer-top">
 					<h2>Корзина</h2>
